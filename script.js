@@ -19,15 +19,32 @@ function getCell(content) {
     return cell;
 }
 
+// Funzione per generare 16 numeri casuali (Bombe)
+const createBombs = (cells, totalBombs) => {
+    const bombs = [];
+    while (bombs.length < totalBombs) { // Fintanto che il numero di elementi nell'array bombs è minore delle bombe totali che devo ottenere (16)
+        const randomNumber = Math.floor(Math.random() * cells) + 1; // Numero casuale tra 1 e 16
+        if (!bombs.includes(randomNumber)) bombs.push(randomNumber); // Inserisco solo i numeri random che non si ripetono nell'array bombs (Per avere solo numeri divesi tra loro)
+    }
+    return bombs;
+}
+
+
+
 // ! EVENTI DINAMICI
 button.addEventListener('click', function () {
 
     // ! FASE DI ELABORAZIONE
     // Imposto il numero di celle sulle quali dovrò ciclare
     const rows = 10;
-    const cols = 10;    
+    const cols = 10;
     const cells = rows * cols;
     let score = 0;
+    const totalBombs = 16;
+
+    // Genero le bombe
+    const bombs = createBombs(cells, totalBombs);
+    console.log(bombs);
 
     // Per fare in modo che si svuoti ogni volta
     grid.innerHTML = '';
@@ -51,7 +68,7 @@ button.addEventListener('click', function () {
         cell.addEventListener('click', () => {
 
             // Faccio in modo che la funzione si interrompa se la cella ha già la classe 'clicked'
-            if(cell.classList.contains('clicked')) return;
+            if (cell.classList.contains('clicked')) return;
 
             // Aggiungo la classe che mi colora la cella al click
             cell.classList.add('clicked');
