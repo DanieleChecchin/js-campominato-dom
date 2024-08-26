@@ -3,6 +3,7 @@
 // Mi prendo gli elementi dal DOM
 const button = document.querySelector('button');
 const grid = document.getElementById('grid');
+const scoreElement = document.getElementById('score')
 
 // Funzione per creare le celle
 function getCell(content) {
@@ -26,6 +27,7 @@ button.addEventListener('click', function () {
     const rows = 10;
     const cols = 10;    
     const cells = rows * cols;
+    let score = 0;
 
     // Per fare in modo che si svuoti ogni volta
     grid.innerHTML = '';
@@ -35,7 +37,6 @@ button.addEventListener('click', function () {
 
     // Per ogni cella che voglio creare:
     for (let i = 1; i <= cells; i++) {
-        
 
         // Creo una cella (richiamando la funzione creata all'inizio)
         const cell = getCell(i);
@@ -47,9 +48,17 @@ button.addEventListener('click', function () {
         grid.appendChild(cell);
 
         // Aggiungo l'evento del click sulla cella
-        cell.addEventListener('click', function () {
+        cell.addEventListener('click', () => {
+
+            // Faccio in modo che la funzione si interrompa se la cella ha già la classe 'clicked'
+            if(cell.classList.contains('clicked')) return;
+
             // Aggiungo la classe che mi colora la cella al click
-            cell.classList.add('bg-cell');
+            cell.classList.add('clicked');
+
+            // Incremento il punteggio ogni volta che clicco su una casella senza bomba e lo stampo in pagine nel div con span id(Milestone 1)
+            scoreElement.innerText = ++score;
+
             //Stampo in console il numero della cella cliccata
             console.log(i);
         })

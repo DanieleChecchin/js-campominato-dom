@@ -21,6 +21,7 @@ header{
 .content{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .left-content{
@@ -68,8 +69,10 @@ a{
     cursor: pointer;
 }
 
-.bg-cell{
+.clicked{
     background-color: blueviolet;
+    color: white;
+    cursor: not-allowed;
 }
 
 .medium{
