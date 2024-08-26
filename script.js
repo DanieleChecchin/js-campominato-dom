@@ -29,6 +29,13 @@ const createBombs = (cells, totalBombs) => {
     return bombs;
 }
 
+// Funzione per capire se la partita è terminata per la vittoria della stessa o se per aver cliccato una bomba
+const endGame = (score, hasWon = false) => { // Prendo come parametri il punteggio(per stamparlo) è un valore booleano per dire se ha vinto o perso
+    
+    const result = hasWon ? 'Vinto' : 'Perso'; // Ternario per inserire la parola 'vinto' o 'perso' da usare nell'alert
+    alert(`Hai ${result} , partita terminata. Hai totalizzato ${score} punti!`); // Messaggio finale
+}
+
 
 
 // ! EVENTI DINAMICI
@@ -71,21 +78,23 @@ button.addEventListener('click', function () {
             // Faccio in modo che la funzione si interrompa se la cella ha già la classe 'clicked'
             if (cell.classList.contains('clicked')) return;
 
-            // Verifico se l'utente ha cliccato una casella contenente una bomba
-            if(bombs.includes(i)){
-                console.log(`Hai perso, partita terminata. Hai totalizzato ${score} punti!`);
-                cell.classList.add('bomb');
-            }
+            // Verifico se la cella cliccata dall'utente è una bomba
+            const isBomb = bombs.includes(parseInt(event.target.innerText));
 
-            // Aggiungo la classe che mi colora la cella al click
-            cell.classList.add('clicked');
+            // Se l'utente ha cliccato una casella contenente una bomba
+            if (isBomb) {
+                cell.classList.add('bomb'); // Aggiungo la classe per le bombe
+                endGame(score); // Funzione di fine partita
 
-            // Incremento il punteggio ogni volta che clicco su una casella senza bomba e lo stampo in pagine nel div con span id(Milestone 1)
-            scoreElement.innerText = ++score;
+            } else { // Se non è una bomba
+                // Aggiungo la classe che mi colora la cella al click
+                cell.classList.add('clicked');
 
-            // Faccio un if dicendo che se il punteggio dell'utente è uguale al punteggio massimo raggiungibile vuol dire che ha vinto e stampo in console il messaggio
-            if(score === maxScore){
-                console.log(`Hai vinto. Hai totalizzato ${scorse} punti!`)
+                // Incremento il punteggio ogni volta che clicco su una casella senza bomba e lo stampo in pagine nel div con span id(Milestone 1)
+                scoreElement.innerText = ++score;
+
+                // Faccio un if dicendo che se il punteggio dell'utente è uguale al punteggio massimo raggiungibile vuol dire che ha vinto e stampo in console il messaggio
+                if (score === maxScore) endGame(score, true); // Funzione di fine partita
             }
         })
     }
