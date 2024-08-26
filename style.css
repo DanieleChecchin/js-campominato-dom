@@ -60,8 +60,6 @@ a{
 }
 
 .cell{
-    height: 50px;
-    flex-basis: 50px;
     border: 1px solid black;
     display: flex;
     justify-content: center;
@@ -75,14 +73,19 @@ a{
     cursor: not-allowed;
 }
 
-.medium{
-    height: calc(100 / 9);
-    flex-basis: calc(100 / 9);
+.cell.easy{
+    height: 10%;
+    width: 10%;
 }
 
-.hard{
+.cell.normal{
+    height: calc(100 / 9);
+    width: calc(100 / 9);
+}
+
+.cell.hard{
     height: calc(100% / 7);
-    flex-basis: calc(100% / 7);
+    width: calc(100% / 7);
 }
 
 .bomb{
