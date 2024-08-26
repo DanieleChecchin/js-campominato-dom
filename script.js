@@ -3,7 +3,9 @@
 // Mi prendo gli elementi dal DOM
 const button = document.querySelector('button');
 const grid = document.getElementById('grid');
-const scoreElement = document.getElementById('score')
+const scoreElement = document.getElementById('score');
+const form = document.querySelector('form');
+const select = document.getElementById('select-level');
 
 // Funzione per creare le celle
 function getCell(content) {
@@ -31,7 +33,7 @@ const createBombs = (cells, totalBombs) => {
 
 // Funzione per capire se la partita è terminata per la vittoria della stessa o se per aver cliccato una bomba
 const endGame = (score, hasWon = false) => { // Prendo come parametri il punteggio(per stamparlo) è un valore booleano per dire se ha vinto o perso
-    
+
     const result = hasWon ? 'Vinto' : 'Perso'; // Ternario per inserire la parola 'vinto' o 'perso' da usare nell'alert
     alert(`Hai ${result} , partita terminata. Hai totalizzato ${score} punti!`); // Messaggio finale
 }
@@ -39,26 +41,43 @@ const endGame = (score, hasWon = false) => { // Prendo come parametri il puntegg
 
 
 // ! EVENTI DINAMICI
-button.addEventListener('click', function () {
-
-    // ! FASE DI ELABORAZIONE
-    // Imposto il numero di celle sulle quali dovrò ciclare
-    const rows = 10;
-    const cols = 10;
-    const cells = rows * cols;
-    let score = 0;
-    const totalBombs = 16;
-    const maxScore = cells - totalBombs;
-
-    // Genero le bombe
-    const bombs = createBombs(cells, totalBombs);
-    console.log(bombs);
+form.addEventListener('submit', function (e) {
+    e.preventDefault();
 
     // Per fare in modo che si svuoti ogni volta
     grid.innerHTML = '';
 
     // Cambio il testo al bottone
     button.innerText = 'Restart';
+
+    // ! FASE DI ELABORAZIONE
+    // Prendo i valori della select 
+    const level = select.value;
+
+    // Imposto il numero di celle sulle quali dovrò ciclare (Difficoltà facile)
+    let rows = 10;
+    let cols = 10;
+
+    // Uso un switch per decidere il numero di caselle in base alla difficoltà (Media o Difficile)
+    switch (level) {
+        case 'normal':
+            rows = 9;
+            cols = 9;
+            break;
+        case 'hard':
+            rows = 7;
+            cols = 7;
+            break;
+    }
+
+    const cells = rows * cols; // Totale celle in base alla difficoltà
+    let score = 0; // Punteggio iniziale
+    const totalBombs = 16; // Totale bombe
+    const maxScore = cells - totalBombs; // Punteggio massimo per vincere
+
+    // Genero le bombe
+    const bombs = createBombs(cells, totalBombs);
+    console.log(bombs);
 
     // Per ogni cella che voglio creare:
     for (let i = 1; i <= cells; i++) {
@@ -79,7 +98,7 @@ button.addEventListener('click', function () {
             if (cell.classList.contains('clicked')) return;
 
             // Verifico se la cella cliccata dall'utente è una bomba
-            const isBomb = bombs.includes(parseInt(event.target.innerText));
+            const isBomb = bombs.includes(parseInt(i));
 
             // Se l'utente ha cliccato una casella contenente una bomba
             if (isBomb) {
