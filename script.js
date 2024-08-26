@@ -41,6 +41,7 @@ button.addEventListener('click', function () {
     const cells = rows * cols;
     let score = 0;
     const totalBombs = 16;
+    const maxScore = cells - totalBombs;
 
     // Genero le bombe
     const bombs = createBombs(cells, totalBombs);
@@ -81,6 +82,11 @@ button.addEventListener('click', function () {
 
             // Incremento il punteggio ogni volta che clicco su una casella senza bomba e lo stampo in pagine nel div con span id(Milestone 1)
             scoreElement.innerText = ++score;
+
+            // Faccio un if dicendo che se il punteggio dell'utente è uguale al punteggio massimo raggiungibile vuol dire che ha vinto e stampo in console il messaggio
+            if(score === maxScore){
+                console.log(`Hai vinto. Hai totalizzato ${scorse} punti!`)
+            }
         })
     }
 })
