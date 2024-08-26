@@ -84,3 +84,8 @@ a{
     height: calc(100% / 7);
     flex-basis: calc(100% / 7);
 }
+
+.bomb{
+    color: white;
+    background-color: red;
+}

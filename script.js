@@ -70,14 +70,17 @@ button.addEventListener('click', function () {
             // Faccio in modo che la funzione si interrompa se la cella ha già la classe 'clicked'
             if (cell.classList.contains('clicked')) return;
 
+            // Verifico se l'utente ha cliccato una casella contenente una bomba
+            if(bombs.includes(i)){
+                console.log(`Hai perso, partita terminata. Hai totalizzato ${score} punti!`);
+                cell.classList.add('bomb');
+            }
+
             // Aggiungo la classe che mi colora la cella al click
             cell.classList.add('clicked');
 
             // Incremento il punteggio ogni volta che clicco su una casella senza bomba e lo stampo in pagine nel div con span id(Milestone 1)
             scoreElement.innerText = ++score;
-
-            //Stampo in console il numero della cella cliccata
-            console.log(i);
         })
     }
 })
