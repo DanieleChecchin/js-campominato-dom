@@ -8,14 +8,14 @@ const form = document.querySelector('form');
 const select = document.getElementById('select-level');
 
 // Funzione per creare le celle
-function getCell(content) {
+function getCell(cellNumber, level) {
     // Creo una cella
     const cell = document.createElement('div');
     // Aggiungo la classe cell al div creato
-    cell.className = 'cell';
+    cell.classList.add = ('cell', level);
 
     // Aggiungo il contenuto alla cella (aggiungo i numeri chiesti)
-    cell.append(content);
+    cell.innerText = cellNumber;
 
     // Restituisco all'esterno la cella creata
     return cell;
@@ -53,7 +53,7 @@ form.addEventListener('submit', function (e) {
     // ! FASE DI ELABORAZIONE
     // Prendo i valori della select 
     const level = select.value;
-
+    
     // Imposto il numero di celle sulle quali dovrò ciclare (Difficoltà facile)
     let rows = 10;
     let cols = 10;
@@ -83,10 +83,7 @@ form.addEventListener('submit', function (e) {
     for (let i = 1; i <= cells; i++) {
 
         // Creo una cella (richiamando la funzione creata all'inizio)
-        const cell = getCell(i);
-
-        // Aggiungo il contenuto alla cella (richiamando la funzione creata e che ho modificato)
-        const content = cells[i];
+        const cell = getCell(i, level);
 
         // Inserisco la cella nel DOM
         grid.appendChild(cell);
