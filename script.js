@@ -11,8 +11,8 @@ const select = document.getElementById('select-level');
 function getCell(cellNumber, level) {
     // Creo una cella
     const cell = document.createElement('div');
-    // Aggiungo la classe cell al div creato
-    cell.classList.add = ('cell', level);
+    // Aggiungo la classe cell ed il livello al div creato
+    cell.classList.add('cell', level);
 
     // Aggiungo il contenuto alla cella (aggiungo i numeri chiesti)
     cell.innerText = cellNumber;

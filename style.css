@@ -54,6 +54,8 @@ a{
 }
 
 #grid{
+    width: 600px;
+    height: 600px;
     padding: 50px 0;
     display: flex;
     flex-wrap: wrap;
@@ -79,8 +81,8 @@ a{
 }
 
 .cell.normal{
-    height: calc(100 / 9);
-    width: calc(100 / 9);
+    height: calc(100% / 9);
+    width: calc(100% / 9);
 }
 
 .cell.hard{
