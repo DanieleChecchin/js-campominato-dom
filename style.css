@@ -1,0 +1,83 @@
+/* CSS Reset */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Utils */
+
+.container{
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+header{
+    height: 80px;
+    padding: 20px 30px;
+}
+
+.content{
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-content{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.right-content{
+    display: flex;
+    align-items: center;
+}
+
+button{
+    padding: 0 30px;
+}
+
+main{
+    background-color: #7FFFD4;
+}
+
+footer{
+    height: 60px;
+    line-height: 60px;
+    padding: 0 30px;
+}
+
+a{
+    text-decoration: none;
+}
+
+#grid{
+    padding: 50px 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cell{
+    height: 50px;
+    flex-basis: 50px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.bg-cell{
+    background-color: blueviolet;
+}
+
+.medium{
+    height: calc(100 / 9);
+    flex-basis: calc(100 / 9);
+}
+
+.hard{
+    height: calc(100% / 7);
+    flex-basis: calc(100% / 7);
+}
